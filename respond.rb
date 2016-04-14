@@ -22,7 +22,7 @@ get '/place' do
   end.text
 end
 
-post 'place-transcription' do
+post '/place-transcription' do
   content_type 'text/xml'
   puts params['TranscriptionText']
 end
