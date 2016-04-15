@@ -6,6 +6,7 @@ require 'sinatra/activerecord'
 Dotenv.load
 
 set :logging, true
+set :database, { adapter: 'postgresql' }
 
 get '/' do
   content_type 'text/xml'
