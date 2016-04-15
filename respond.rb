@@ -81,15 +81,15 @@ end
 
 post '/sender-transcription' do
   content_type 'text/xml'
-  puts params['TranscriptionText']
+  puts params
 end
 
 post '/place-transcription' do
   content_type 'text/xml'
-  puts params['TranscriptionText']
+  puts params
 end
 
 post '/recipient-transcription' do
   content_type 'text/xml'
-  puts params['TranscriptionText']
+  puts params
 end
