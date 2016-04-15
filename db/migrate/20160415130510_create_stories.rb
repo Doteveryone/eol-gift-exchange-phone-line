@@ -5,6 +5,8 @@ class CreateStories < ActiveRecord::Migration
       t.string :sender_audio
       t.string :recipient
       t.string :recipient_audio
+      t.string :place
+      t.string :place_url
       t.string :story_audio
       t.string :call_sid
       t.boolean :sent
