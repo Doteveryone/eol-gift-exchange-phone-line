@@ -3,6 +3,8 @@ development:
   database: giftexchange
 
 production:
-  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  encoding: utf8
 
 
