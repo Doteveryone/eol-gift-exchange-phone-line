@@ -25,7 +25,12 @@ end
 
 get '/place' do
   content_type 'text/xml'
-  recording_url = params['RecordingUrl']
+
+  call_sid = params['CallSid']
+  story = Story.find_by_call_sid(call_sid)
+  place_audio = params['RecordingUrl']
+  story.update(place_audio: place_audio)
+
   Twilio::TwiML::Response.new do |r|
     r.Say 'Thank you. Now tell me your story. When finished, stop speaking or press star.'
     r.Record maxlength: 3600, action: '/story', method: 'get', playBeep: false, finishOnKey: '*'
@@ -34,7 +39,12 @@ end
 
 get '/story' do
   content_type 'text/xml'
-  recording_url = params['RecordingUrl']
+
+  call_sid = params['CallSid']
+  story = Story.find_by_call_sid(call_sid)
+  story_audio = params['RecordingUrl']
+  story.update(story_audio: story_audio)
+
   Twilio::TwiML::Response.new do |r|
     r.Say 'Thank you. Now please tell me the full name of the recipient.'
     r.Record maxlength: 20, action: '/recipient', method: 'get', transcribe: true, transcribeCallback: '/recipient-transcription', playBeep: false
@@ -43,7 +53,12 @@ end
 
 get '/recipient' do
   content_type 'text/xml'
-  recording_url = params['RecordingUrl']
+
+  call_sid = params['CallSid']
+  story = Story.find_by_call_sid(call_sid)
+  recipient_audio = params['RecordingUrl']
+  story.update(recipient_audio: recipient_audio)
+
   Twilio::TwiML::Response.new do |r|
     r.Say 'Thank you. I will send the story postcard on your behalf.'
     r.Hangup
