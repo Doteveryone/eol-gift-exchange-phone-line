@@ -8,7 +8,7 @@ The project runs on Ruby and Sinatra, and makes use of Twilio for call handling.
 
 ## Installation
 
-Clone the repository and run `bundle install` from the project’s root.
+Clone the repository and run `bundle install` from the project’s root. To set up the database run `rake db:create db:migrate`.
 
 ### Twilio
 
