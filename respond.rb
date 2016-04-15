@@ -33,7 +33,7 @@ get '/sender' do
 
   Twilio::TwiML::Response.new do |r|
     r.Say 'Thank you. Now state the name of the place your story is about.'
-    r.Record maxlength: 20, action: '/place', method: 'get', transcribe: true, transcribeCallback: '/place-transcription', playBeep: false
+    r.Record maxlength: 20, action: '/place', method: 'get', playBeep: false
   end.text
 end
 
@@ -61,7 +61,7 @@ get '/story' do
 
   Twilio::TwiML::Response.new do |r|
     r.Say 'Thank you. Now please tell me the full name of the recipient.'
-    r.Record maxlength: 20, action: '/recipient', method: 'get', transcribe: true, transcribeCallback: '/recipient-transcription', playBeep: false
+    r.Record maxlength: 20, action: '/recipient', method: 'get', playBeep: false
   end.text
 end
 
@@ -77,19 +77,4 @@ get '/recipient' do
     r.Say 'Thank you. I will send the story postcard on your behalf.'
     r.Hangup
   end.text
-end
-
-post '/sender-transcription' do
-  content_type 'text/xml'
-  puts params
-end
-
-post '/place-transcription' do
-  content_type 'text/xml'
-  puts params
-end
-
-post '/recipient-transcription' do
-  content_type 'text/xml'
-  puts params
 end
