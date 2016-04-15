@@ -9,3 +9,4 @@ gem 'rake'
 
 gem 'twilio-ruby'
 gem 'dotenv'
+gem 'postmark'
