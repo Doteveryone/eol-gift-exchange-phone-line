@@ -1,0 +1,8 @@
+development:
+  adapter: postgresql
+  database: giftexchange
+
+production:
+  adapter: postgresql
+
+
