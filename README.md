@@ -11,3 +11,7 @@ The project runs on Ruby and Sinatra, and makes use of Twilio for call handling.
 Clone the repository and run `bundle install` from the project’s root.
 
 To try out the call you will need to set up a Twilio account and point it to the app.
+
+## Inspecting the records on Heroku
+
+Run `heroku run console` to load the interactive Ruby environment.
