@@ -12,6 +12,8 @@ Clone the repository and run `bundle install` from the project’s root.
 
 To try out the call you will need to set up a Twilio account and point it to the app.
 
+On Heroku you will have to set up the following environment variables to connect to the database: DATABASE, USER, HOST, PORT.
+
 ## Inspecting the records on Heroku
 
 Run `heroku run console` to load the interactive Ruby environment.
