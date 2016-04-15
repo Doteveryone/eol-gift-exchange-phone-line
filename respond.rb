@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'twilio-ruby'
 require 'dotenv'
+require 'activerecord'
 
 Dotenv.load
 
