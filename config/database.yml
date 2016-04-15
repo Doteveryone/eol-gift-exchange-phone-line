@@ -3,6 +3,11 @@ development:
   database: giftexchange
 
 production:
+  adapter: postgresql
+  database: <%= ENV['DATABASE'] %>
+  user: <%= ENV['USER'] %>
+  port: <%= ENV['PORT'] %>
+  host: <%= ENV['HOST'] %>
   url: <%= ENV['DATABASE_URL'] %>
   pool: 5
   encoding: utf8
