@@ -6,7 +6,6 @@ require 'sinatra/activerecord'
 Dotenv.load
 
 set :logging, true
-set :database, { adapter: 'postgresql' }
 
 class Story < ActiveRecord::Base
 end
