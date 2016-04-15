@@ -1,4 +1,6 @@
 # config.ru
+$stdout.sync = true
+
 require 'sinatra'
 
 require './respond'
