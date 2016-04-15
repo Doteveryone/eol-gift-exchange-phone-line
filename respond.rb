@@ -21,8 +21,8 @@ get '/place' do
   content_type 'text/xml'
   puts params['RecordingUrl']
   Twilio::TwiML::Response.new do |r|
-    r.Say 'Thank you. Now tell me your story. When finished, press star.'
-    r.Record maxlength: 3600, action: '/story', method: 'get', playBeep: false
+    r.Say 'Thank you. Now tell me your story. When finished, stop speaking or press star.'
+    r.Record maxlength: 3600, action: '/story', method: 'get', playBeep: false, finishOnKey: '*'
   end.text
 end
 
