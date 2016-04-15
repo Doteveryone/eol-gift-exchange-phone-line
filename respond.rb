@@ -19,7 +19,7 @@ get '/' do
     r.Say 'Hello, you are using a service which lets you send audio postcards.'
     r.Say 'Today’s theme is Places. Think of a story you can tell someone about a specific place.'
     r.Say 'I will ask you to record the story, but first please say your name.'
-    r.Record maxlength: 15, action: '/sender', method: 'get', transcribe: true, transcribeCallback: '/sender-transcription', playBeep: false
+    r.Record maxlength: 15, action: '/sender', method: 'get', playBeep: false
   end.text
 end
 
