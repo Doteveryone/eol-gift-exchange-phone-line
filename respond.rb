@@ -19,9 +19,33 @@ get '/' do
   Story.create(call_sid: params['CallSid'])
 
   Twilio::TwiML::Response.new do |r|
-    r.Say 'Hello, you are using a service which lets you send audio postcards.'
+    r.Say 'Hello, you are using a service which lets you send audio postcards, made by the Products and Services team.'
     r.Say 'Today’s theme is Places. Think of a story you can tell someone about a specific place.'
-    r.Say 'I will ask you to record the story, but first please say your name.'
+    r.Say 'I will ask you a few questions to fill out the postcard. I will ask your name, the recipient’s name, the name of the place you can tell a story about and finally, the story itself.'
+    r.Say 'I will play some muzak while you have a think about what to say. When you’re ready press any key and I will begin asking the questions.'
+    r.Enqueue waitUrl: '/thinking', waitUrlMethod: 'get'
+  end.text
+end
+
+get '/thinking' do
+  content_type 'text/xml'
+
+  Twilio::TwiML::Response.new do |r|
+    r.Gather numdigits: '1', action: '/record', method: 'get' do |g|
+      g.Play 'http://prototyping-temp-files.s3.amazonaws.com/Malaventura_-_13_-_Convicted_Jazz_Drones.mp3'
+    end
+  end.text
+end
+
+get '/record' do
+  content_type 'text/xml'
+
+  # no new content, so we don’t have to fetch
+  # anything from the database
+
+  Twilio::TwiML::Response.new do |r|
+    r.Say 'I will ask about your name, the recipient’s name, the name of the place and finally about your story.'
+    r.Say 'Please say your name.'
     r.Record maxlength: 15, action: '/sender', method: 'get', playBeep: false
   end.text
 end
