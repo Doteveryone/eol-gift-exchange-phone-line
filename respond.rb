@@ -74,8 +74,8 @@ get '/place' do
   story.update(place_audio: place_audio)
 
   Twilio::TwiML::Response.new do |r|
-    r.Say 'Thank you. Now tell me your story. When finished, stop speaking or press star.'
-    r.Record maxlength: 3600, action: '/story', method: 'get', playBeep: false, finishOnKey: '*'
+    r.Say 'Thank you. Now please tell me the full name of the recipient.'
+    r.Record maxlength: 20, action: '/recipient', method: 'get', playBeep: false
   end.text
 end
 
@@ -88,8 +88,8 @@ get '/story' do
   story.update(story_audio: story_audio)
 
   Twilio::TwiML::Response.new do |r|
-    r.Say 'Thank you. Now please tell me the full name of the recipient.'
-    r.Record maxlength: 20, action: '/recipient', method: 'get', playBeep: false
+    r.Say 'Thank you. I will send the story postcard on your behalf.'
+    r.Hangup
   end.text
 end
 
@@ -109,7 +109,7 @@ get '/recipient' do
     track_opens: true)
 
   Twilio::TwiML::Response.new do |r|
-    r.Say 'Thank you. I will send the story postcard on your behalf.'
-    r.Hangup
+    r.Say 'Thank you. Now tell me your story. When finished, stop speaking or press star.'
+    r.Record maxlength: 3600, action: '/story', method: 'get', playBeep: false, finishOnKey: '*'
   end.text
 end
