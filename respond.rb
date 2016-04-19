@@ -87,6 +87,13 @@ get '/story' do
   story_audio = params['RecordingUrl']
   story.update(story_audio: story_audio)
 
+  postmark.deliver(
+    from: ENV['NOTIFICATION_SOURCE'],
+    to: ENV['NOTIFICATION_RECIPIENT'],
+    subject: '[Gift Exchange] New story was created',
+    html_body: "Sender: #{story.sender_audio}<br>Recipient: #{story.recipient_audio}<br>Place: #{story.place_audio}<br>Story: #{story.story_audio}",
+    track_opens: true)
+
   Twilio::TwiML::Response.new do |r|
     r.Say 'Thank you. I will send the story postcard on your behalf.'
     r.Hangup
@@ -100,13 +107,6 @@ get '/recipient' do
   story = Story.find_by_call_sid(call_sid)
   recipient_audio = params['RecordingUrl']
   story.update(recipient_audio: recipient_audio)
-
-  postmark.deliver(
-    from: ENV['NOTIFICATION_SOURCE'],
-    to: ENV['NOTIFICATION_RECIPIENT'],
-    subject: '[Gift Exchange] New story was created',
-    html_body: "Sender: #{story.sender_audio}<br>Recipient: #{story.recipient_audio}<br>Place: #{story.place_audio}<br>Story: #{story.story_audio}",
-    track_opens: true)
 
   Twilio::TwiML::Response.new do |r|
     r.Say 'Thank you. Now tell me your story. When finished, stop speaking or press star.'
