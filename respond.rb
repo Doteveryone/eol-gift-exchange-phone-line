@@ -32,7 +32,7 @@ get '/thinking' do
 
   Twilio::TwiML::Response.new do |r|
     r.Gather numdigits: '1', action: '/record', method: 'get', timeout: 3600, finishOnKey: '' do |g|
-      g.Play 'http://prototyping-temp-files.s3.amazonaws.com/Malaventura_-_13_-_Convicted_Jazz_Drones.mp3'
+      g.Play 'http://prototyping-temp-files.s3.amazonaws.com/muzak.mp3'
     end
   end.text
 end
